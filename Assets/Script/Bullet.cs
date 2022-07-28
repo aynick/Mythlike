@@ -17,13 +17,12 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Enemy enemy))
         {
-            enemy.GetDamage(Damage);
-            Destroy(gameObject);
+            Debug.Log("Popal");
         }
     }
 }
