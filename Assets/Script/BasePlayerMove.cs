@@ -1,51 +1,27 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class BasePlayerMove : MonoBehaviour
+namespace Script
 {
-    [SerializeField] private float _speed;
+    public class BasePlayerMove
+    {
+        private float _speed;
+        private Rigidbody2D rigidbody2D;
     
-    private Rigidbody2D _rigidbody2D;
-    private Transform _hand;
-    [SerializeField] private Transform _leftPos;
-    [SerializeField] private Transform _rightPos;
-    [SerializeField]private SpriteRenderer _spriteRenderer;
-    
-
-    private void Start()
-    {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        _hand = transform.Find("Hand");
-    }
-
-    private void FixedUpdate()
-    {
-        Move();
-    }
-
-    private void Move()
-    {
-        var dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        _rigidbody2D.velocity = dir * _speed;
-        FlipHand(dir.x);
-    }
-
-    private void FlipHand(float dir)
-    {
-        Mathf.Clamp(dir, -1, 1);
-        if (dir < 0)
+        public BasePlayerMove(Rigidbody2D rigidbody2D, float speed)
         {
-            _hand.SetParent(_leftPos);
-            _spriteRenderer.flipX = true;
+            this.rigidbody2D = rigidbody2D;
+            _speed = speed;
         }
-        if (dir > 0)
+
+        public void Update()
         {
-            _hand.SetParent(_rightPos);
-            _spriteRenderer.flipX = false;
+            Move();
         }
-        _hand.localPosition = Vector3.zero;
+
+        private void Move()
+        {
+            var dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            rigidbody2D.velocity = dir * _speed;
+        }
     }
 }
