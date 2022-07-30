@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Script;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Enemy : MonoBehaviour
@@ -7,6 +9,22 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected int HealthPoint;
     [SerializeField] protected int Damage;
     [SerializeField] protected int Protection;
+    [SerializeField] private float _speed;
+    [SerializeField] private Transform[] _patrolPointsTransform;
+    [SerializeField] private float AttackRate;
+    [SerializeField] private float _detectRadius;
+
+    private BaseEnemyLogic _baseEnemyLogic;
+
+    private void Start()
+    {
+        _baseEnemyLogic = new BaseEnemyLogic(_patrolPointsTransform,transform,_speed,gameObject?.GetComponent<Rigidbody2D>(),_detectRadius,AttackRate);
+    }
+
+    private void Update()
+    {
+        _baseEnemyLogic.Update();
+    }
     // [SerializeField] protected float Speed;
     // [SerializeField] protected float DetectRadius;
     // [SerializeField] protected float AttackDistace;
@@ -41,9 +59,5 @@ public abstract class Enemy : MonoBehaviour
     //     HealthPoint -= damage;
     // }
     //
-    // private Collider2D[] DetectColliders()
-    // {  
-    //     var DetectedColliders = Physics2D.OverlapCircleAll(transform.position,DetectRadius);
-    //     return DetectedColliders;
-    // }
+
 }
