@@ -1,15 +1,28 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Script
 {
+    [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Player : MonoBehaviour
     {
-        public int healthPoint;
-        public float damage;
-        public int protection; 
-        public float speed;
-        public abstract void InitStats();
+        [SerializeField]protected int healthPoint;
+        [SerializeField]public int damage;
+        [SerializeField]protected int protection;
+        [SerializeField] protected float speed;
+        private BasePlayerMove _playerMove;
+        private BasePlayerAttack _playerAttack;
+
+        private void Awake()
+        {
+            _playerMove = new BasePlayerMove(GetComponent<Rigidbody2D>(),speed);
+            _playerAttack = new BasePlayerAttack(transform,this);
+        }
+
+        private void FixedUpdate()
+        {
+            _playerAttack.Update();
+            _playerMove.Update();
+        }
     }
 }
