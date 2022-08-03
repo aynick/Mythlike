@@ -43,7 +43,6 @@ namespace Script
             var thisVector = Vector3.right;
             var angle = Vector3.SignedAngle(thisVector, mouseDir, Vector3.forward);
             _hand.localRotation = Quaternion.Euler(transform.localRotation.x,transform.localRotation.y,angle);
-            Debug.Log(_hand.localRotation.z);
         }
     }
 }
