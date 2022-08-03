@@ -980,7 +980,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthPoint: 5
   Damage: 1
-  Protection: 0
+  Protection: 1
+  _speed: 0.1
+  _patrolPointsTransform:
+  - {fileID: 563211664}
+  - {fileID: 241527530}
+  - {fileID: 2080042981}
+  - {fileID: 773843215}
+  AttackRate: 2
+  _detectRadius: 5
 --- !u!212 &1900062605
 SpriteRenderer:
   m_ObjectHideFlags: 0
