@@ -6,7 +6,7 @@ namespace Script
     {
         public override void InitStats()
         {
-            speed = 1;
+            speed = 4;
             healthPoint = 2;
             protection = 0;
             damage = 3;

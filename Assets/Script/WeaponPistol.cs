@@ -35,7 +35,7 @@ namespace Script
         public override void Attack()
         {
             if(!isReady) return;
-            Bullet bulletClone = Instantiate(bullet, FirePoint.position, transform.rotation);
+            Bullet bulletClone = Instantiate(bullet, FirePoint.position, FirePoint.rotation);
             bulletClone.GetComponent<Bullet>().Damage = Damage;
             cd = FireRate;
             isReady = false;

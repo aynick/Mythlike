@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Script
 {
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(PlayerFlip))]
     public class PlayerBehavior : MonoBehaviour, IStateSwitcher
     {
         private Player _player;
@@ -37,7 +38,7 @@ namespace Script
         {
             switch (_playerType)
             {
-                case PlayerType.Warrior : _player = new WariorPlayer();
+                case PlayerType.Warrior : _player = new WarriorPlayer();
                     break;
                 case PlayerType.Wizard : _player = new WizardPlayer();
                     break;
@@ -46,12 +47,13 @@ namespace Script
             }
 
             _player.InitStats();
+            _playerFlip = gameObject?.GetComponent<PlayerFlip>();
             InitPlayerTools();
         }
 
         void InitPlayerTools()
         {
-            _playerAttack = new BasePlayerAttack(transform,_player);
+            _playerAttack = new BasePlayerAttack(transform,_player,_playerFlip);
             _playerMove = new BasePlayerMove(GetComponent<Rigidbody2D>(),_player.speed);
         }
 
