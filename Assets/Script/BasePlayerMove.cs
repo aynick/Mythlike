@@ -11,6 +11,7 @@ namespace Script
         {
             this.rigidbody2D = rigidbody2D;
             _speed = speed;
+            rigidbody2D.isKinematic = true;
         }
 
         public void Update()
