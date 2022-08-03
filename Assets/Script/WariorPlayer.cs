@@ -6,11 +6,14 @@ using Unity.Mathematics;
 using UnityEngine;
 public class WariorPlayer : Player
 {
-    public override void InitStats()
-    {
-        healthPoint = 5;
-        protection = 3;
-        damage = 1;
-        speed = 1;
-    }
+    
+
+    // void RotateWeapon()
+    // {
+    //     mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
+    //     var mouseDir = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+    //     var thisVector = transform.right;
+    //     var angle = Vector3.SignedAngle(thisVector, mouseDir, Vector3.forward);
+    //     _handTransform.localRotation = Quaternion.Euler(transform.localRotation.x,transform.localRotation.y,angle);
+    // }
 }
