@@ -13,9 +13,9 @@ namespace Script
         private BasePlayerMove _playerMove;
         private BasePlayerAttack _playerAttack;
         private PlayerFlip _playerFlip;
-        private BasePlayerState _currentState;
-        private List<BasePlayerState> _allStates;
-
+        private BaseState _currentState;
+        private List<BaseState> _allStates;
+        public PlayerApplyDamage PlayerApplyDamage;
         [SerializeField] private PlayerType _playerType;
 
         private void Awake()
@@ -26,10 +26,10 @@ namespace Script
 
         void InitStates()
         {
-            _allStates = new List<BasePlayerState>()
+            _allStates = new List<BaseState>()
             {
-                new PlayerMoveAndAttackState(_playerAttack,_playerMove,this),
-                new PlayerIdleState(this,_playerAttack)
+                new MoveAndAttackState(_playerAttack,_playerMove,this),
+                new IdleState(this,_playerAttack)
             };
             _currentState = _allStates[0];
         }
@@ -53,6 +53,7 @@ namespace Script
 
         void InitPlayerTools()
         {
+            PlayerApplyDamage = new PlayerApplyDamage(_player);
             _playerAttack = new BasePlayerAttack(transform,_player,_playerFlip);
             _playerMove = new BasePlayerMove(GetComponent<Rigidbody2D>(),_player.speed);
         }
@@ -62,7 +63,7 @@ namespace Script
             _currentState.Action();
         }
 
-        public void SwitchState<T>() where T : BasePlayerState
+        public void SwitchState<T>() where T : BaseState
         {
             var state = _allStates.FirstOrDefault(s => s is T);
             _currentState.Exit();

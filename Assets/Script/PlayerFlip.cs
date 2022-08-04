@@ -17,7 +17,7 @@ namespace Script
         {
             _rigidbody2D = gameObject?.GetComponent<Rigidbody2D>();
             _spriteRenderer = gameObject?.GetComponent<SpriteRenderer>();
-            weaponSprite = hand.FindChild("StartWeapon").GetComponent<SpriteRenderer>();
+            weaponSprite = hand.Find("StartWeapon").GetComponent<SpriteRenderer>();
         }
 
         private void Update()
@@ -30,17 +30,14 @@ namespace Script
             Mathf.Clamp(dir, -1, 1);
             if (dir < 0)
             {
-                hand.SetParent(leftPos);
                 _spriteRenderer.flipX = true;
                 weaponSprite.flipY = true;
             }
             if (dir > 0)
             {
-                hand.SetParent(rightPos);
                 _spriteRenderer.flipX = false;
                 weaponSprite.flipY = false;
             }
-            hand.localPosition = Vector3.zero;
         }
     }
 }

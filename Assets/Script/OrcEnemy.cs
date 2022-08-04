@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class OrcEnemy : Enemy
+public class OrcEnemyBehavior : EnemyBehavior
 {
 
 }

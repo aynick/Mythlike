@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Script
 {
-    public abstract class Player : MonoBehaviour
+    public abstract class Player
     {
         public int healthPoint;
         public float damage;

@@ -3,64 +3,42 @@ using UnityEngine;
 
 namespace Script
 {
-    public class BaseEnemyLogic
+    public class EnemyChase
     {
-        private Rigidbody2D _rigidbody2D;
-        private float _speed;
-        private List<Vector3> _patrolPointsPos = new List<Vector3>();
-        private Transform _transform;
-        
-        private float nextAttack;
-        private float AttackRate;
-        private GameObject thisGameObject;
-        private float _detectRadius;
-        private int _randomIndex;
+        private readonly Rigidbody2D _rigidbody2D;
+        private readonly float _speed;
+        public readonly Transform _transform;
+        private readonly float _detectRadius;
 
-        public BaseEnemyLogic(Transform transform,float speed,Rigidbody2D rigidbody2D,float detectRadius,float attackRate)
+        public EnemyChase(Transform transform, Enemy enemy, Rigidbody2D rigidbody2D)
         {
             _transform = transform;
-            _speed = speed;
+            _speed = enemy.Speed;
             _rigidbody2D = rigidbody2D;
-            _detectRadius = detectRadius;
-            thisGameObject = rigidbody2D.gameObject;
-            AttackRate = attackRate;
-        }
-
-        public BaseEnemyLogic(Transform[] patrolPoints, Transform transform, float speed, Rigidbody2D rigidbody2D,float detectRadius,float attackRate) : this(transform,speed,rigidbody2D,detectRadius,attackRate)
-        {
-            foreach (var point in patrolPoints)
-            {
-                _patrolPointsPos.Add(point.position);
-            }
-            
+            _detectRadius = enemy.DetectRange;
         }
 
         protected virtual void Move()
         {
             if (FindPlayer() != null)
             {
-                _rigidbody2D.MovePosition(Vector2.MoveTowards(_transform.position ,FindPlayer().transform.position, _speed));
-                if ((Vector2.Distance(_transform.position, FindPlayer().transform.position) <= 1))
+                if ((Vector2.Distance(_transform.position, FindPlayer().transform.position) <= 3))
                 {
-                    Attack(FindPlayer());
+                    _rigidbody2D.velocity = Vector2.zero;
+                    return;
                 }
+                var dir = FindPlayer().transform.position - _transform.position;
+                _rigidbody2D.velocity = dir.normalized * _speed;
                 return;
-            }
-            if (_transform.position == _patrolPointsPos[_randomIndex])
-            {
-                _randomIndex = Random.Range(0, _patrolPointsPos.Count);
-            }
-            else
-            {
-                _rigidbody2D.MovePosition(Vector2.MoveTowards(_transform.position ,_patrolPointsPos[_randomIndex], _speed));
             }
         }
         
-        protected virtual Player FindPlayer()
+        
+        public PlayerBehavior FindPlayer()
         {
             foreach (var collider in DetectColliders())
             {
-                if (collider.TryGetComponent(out Player player))
+                if (collider.TryGetComponent(out PlayerBehavior player))
                 {
                     return player;
                 }
@@ -72,24 +50,11 @@ namespace Script
             Move();
         }
 
-        private void DestroyGameObject(GameObject gameObject)
-        {
-            gameObject.SetActive(false);
-        }
-
         private Collider2D[] DetectColliders()
         {  
             var DetectedColliders = Physics2D.OverlapCircleAll(_transform.position,_detectRadius);
             return DetectedColliders;
         }
     
-        protected virtual void Attack(Player player)
-        {
-            if (Time.time > nextAttack)
-            {
-                nextAttack = AttackRate;
-                // player.GetDamage(Damage);
-            }
-        }
     }
 }

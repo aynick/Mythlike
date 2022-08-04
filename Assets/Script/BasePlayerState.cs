@@ -1,9 +1,9 @@
 ﻿namespace Script
 {
-    public abstract class BasePlayerState
+    public abstract class BaseState
     {
         protected IStateSwitcher StateSwitcher;
-        protected BasePlayerState(IStateSwitcher stateSwitcher)
+        protected BaseState(IStateSwitcher stateSwitcher)
         {
             StateSwitcher = stateSwitcher;
         }

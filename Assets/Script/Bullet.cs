@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Enemy enemy))
+        if (other.TryGetComponent(out EnemyBehavior enemy))
         {
             Debug.Log("Popal");
         }
