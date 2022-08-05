@@ -46,14 +46,13 @@ namespace Script
             var mouseDir = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
             var thisVector = Vector3.right;
             var angle = Vector3.SignedAngle(thisVector, mouseDir, Vector3.forward);
-            Debug.Log(angle);
             if (angle < -90 || angle > 90)
             {
-                _playerFlip.FlipHand(-1);
+                _playerFlip.Flip(-1);
             }
             else
             {
-                _playerFlip.FlipHand(1);
+                _playerFlip.Flip(1);
             }
             _hand.localRotation = Quaternion.Euler(transform.localRotation.x,transform.localRotation.y,angle);
         }

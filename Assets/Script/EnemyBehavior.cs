@@ -5,6 +5,7 @@ using System.Linq;
 using Script;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class EnemyBehavior : MonoBehaviour,IStateSwitcher
 {
     private EnemyChase _enemyChase;
@@ -26,11 +27,12 @@ public class EnemyBehavior : MonoBehaviour,IStateSwitcher
         InitType();
         InitTools();
         InitStates();
+        GetComponent<Rigidbody2D>().isKinematic = true;
     }
 
     private void InitTools()
     {
-        var rigidbody2D = gameObject?.GetComponent<Rigidbody2D>();
+        var rigidbody2D = GetComponent<Rigidbody2D>();
         _enemyChase = new EnemyChase(transform,_enemy,rigidbody2D);
         _enemyPatrol = new EnemyPatrol(rigidbody2D,_enemy);
         _enemyAttack = new EnemyAttack(_enemy,transform);
@@ -38,11 +40,13 @@ public class EnemyBehavior : MonoBehaviour,IStateSwitcher
 
     private void InitStates()
     {
+        var animator = GetComponent<Animator>();
+        var rigidbody2D = GetComponent<Rigidbody2D>();
         _allStates = new List<BaseState>()
         {
-            new EnemyAttackState(this,_enemyAttack,_enemy),
-            new EnemyChaseState(this,_enemyChase,_enemy),
-            new EnemyPatrolState(this,_enemyPatrol)
+            new EnemyPatrolState(this,_enemyPatrol,animator,rigidbody2D),
+            new EnemyChaseState(this,_enemyChase,_enemy,animator),
+            new EnemyAttackState(this,_enemyAttack,_enemy,animator,rigidbody2D),
         };
         _currentState = _allStates[0];
     }
@@ -51,13 +55,13 @@ public class EnemyBehavior : MonoBehaviour,IStateSwitcher
     {
         switch (enemyType)
         {
-            case EnemyType.Mimik : _enemy = new MimikEnemy(3,2,1,5,3,5);
+            case EnemyType.Mimik : _enemy = new MimikEnemy(3,2,1,2,3,8);
                 break;
-            case EnemyType.Troll : _enemy = new TrollEnemy(3,2,1,5,3,5);
+            case EnemyType.Troll : _enemy = new TrollEnemy(3,2,1,2,3,8);
                 break;
-            case EnemyType.Skeleton : _enemy = new SkeletonEnemy(3,2,1,5,3,5);
+            case EnemyType.Skeleton : _enemy = new SkeletonEnemy(3,2,1,2,3,8);
                 break;
-            case EnemyType.Slime : _enemy = new SlimeEnemy(3,2,1,5,3,5);
+            case EnemyType.Slime : _enemy = new SlimeEnemy(3,2,1,2,3,8);
                 break;
         }
     }

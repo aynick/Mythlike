@@ -5,14 +5,18 @@ namespace Script
     public class EnemyPatrolState : BaseState
     {
         private EnemyPatrol _enemyPatrol;
-        public EnemyPatrolState(IStateSwitcher stateSwitcher,EnemyPatrol enemyPatrol) : base(stateSwitcher)
+        private Animator _animator;
+        private Rigidbody2D _rigidbody2D;
+        public EnemyPatrolState(IStateSwitcher stateSwitch,EnemyPatrol enemyPatrol,Animator animator,Rigidbody2D rigidbody2D) : base(stateSwitch)
         {
+            _rigidbody2D = rigidbody2D;
+            _animator = animator;
             _enemyPatrol = enemyPatrol;
         }
 
         public override void Enter()
         {
-            Debug.Log("enemy patrol State enter");
+            Debug.Log("das");
         }
 
         public override void Exit()
@@ -24,7 +28,15 @@ namespace Script
         {
             if (_enemyPatrol.FindPlayer())
             {
-                StateSwitcher.SwitchState<EnemyChaseState>();   
+                StateSwitch.SwitchState<EnemyChaseState>();   
+            }
+            else if (_rigidbody2D.velocity == Vector2.zero)
+            {
+                _animator.SetTrigger("Idle");
+            }
+            else
+            {
+                _animator.SetTrigger("Chase");
             }
             _enemyPatrol.Update();
         }

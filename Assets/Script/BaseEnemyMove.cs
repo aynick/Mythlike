@@ -22,11 +22,6 @@ namespace Script
         {
             if (FindPlayer() != null)
             {
-                if ((Vector2.Distance(_transform.position, FindPlayer().transform.position) <= 3))
-                {
-                    _rigidbody2D.velocity = Vector2.zero;
-                    return;
-                }
                 var dir = FindPlayer().transform.position - _transform.position;
                 _rigidbody2D.velocity = dir.normalized * _speed;
                 return;

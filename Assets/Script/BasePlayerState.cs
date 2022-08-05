@@ -2,10 +2,10 @@
 {
     public abstract class BaseState
     {
-        protected IStateSwitcher StateSwitcher;
-        protected BaseState(IStateSwitcher stateSwitcher)
+        protected IStateSwitcher StateSwitch;
+        protected BaseState(IStateSwitcher stateSwitch)
         {
-            StateSwitcher = stateSwitcher;
+            StateSwitch = stateSwitch;
         }
 
         public abstract void Enter();

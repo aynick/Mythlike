@@ -7,7 +7,7 @@ namespace Script
     {
         private List<Vector2> _directions;
         private int _randomIndex;
-        private float _moveRate = 2f;
+        private float _moveRate = 0.5f;
         private float _timer;
         private Rigidbody2D _rigidbody2D;
         private float _speed;

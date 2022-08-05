@@ -6,37 +6,38 @@ namespace Script
     {
         private EnemyChase _enemyChase;
         private Enemy _enemy;
-        public EnemyChaseState(IStateSwitcher stateSwitcher,EnemyChase enemyChase, Enemy enemy) : base(stateSwitcher)
+        private Animator _animator;
+        public EnemyChaseState(IStateSwitcher stateSwitch,EnemyChase enemyChase, Enemy enemy,Animator animator) : base(stateSwitch)
         {
-            _enemy = enemy;
+            _animator = animator;
+                _enemy = enemy;
             _enemyChase = enemyChase;
         }
 
         public override void Enter()
         {
-            Debug.Log("Chase Exit");
-
+            Debug.Log("ChaseEnter");
         }
 
         public override void Exit()
         {
-            Debug.Log("Chase Exit");
+            Debug.Log("Exit");
         }
 
         public override void Action()
         {
+            _enemyChase.Update();
+            _animator.SetTrigger("Chase");
             if (_enemyChase.FindPlayer() != null)
             {
-                if (Vector2.Distance(_enemyChase.FindPlayer().transform.position,_enemyChase._transform.position) <= _enemy.AttackRange)
+                if (Vector2.Distance(_enemyChase.FindPlayer().transform.position,_enemyChase._transform.position) < _enemy.AttackRange)
                 {
-                    StateSwitcher.SwitchState<EnemyAttackState>();
+                    StateSwitch.SwitchState<EnemyAttackState>();
                 }
-                
-                _enemyChase.Update();
             } 
             else
             {
-                StateSwitcher.SwitchState<EnemyPatrolState>();
+                StateSwitch.SwitchState<EnemyPatrolState>();
             }
         }
 

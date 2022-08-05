@@ -9,33 +9,39 @@ namespace Script
         private int _damage;
         private float _attackRange;
         public Transform _transform;
+        public bool IsAttacked;
         public EnemyAttack(Enemy enemy,Transform transform)
         {
             _transform = transform;
             _damage = enemy.Damage;
             _attackRange = enemy.AttackRange;
             _attackRate = enemy.AttackRate;
-            _nextAttack = _attackRange;
+            _nextAttack = _attackRate;
         }
 
         public void Update()
         {
+            Debug.LogError(_nextAttack);
             _nextAttack -= Time.deltaTime;
+            IsAttacked = false;
             if (_nextAttack < 0)
             {
+                IsAttacked = true;
                 Player().PlayerApplyDamage.ApplyDamage(_damage);
-                _nextAttack = _attackRange;
+                _nextAttack = _attackRate;
             }
         }
 
         public PlayerBehavior Player()
         {
-            var collider = Physics2D.OverlapCircle(_transform.position, _attackRange);
-            if (collider.TryGetComponent(out PlayerBehavior playerBehavior))
+            var colliders = Physics2D.OverlapCircleAll(_transform.position, _attackRange);
+            foreach (var collider in colliders)
             {
-                return playerBehavior;
+                if (collider.TryGetComponent(out PlayerBehavior playerBehavior))
+                {
+                    return playerBehavior;
+                }
             }
-
             return null;
         }
     }

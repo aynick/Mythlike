@@ -8,7 +8,7 @@ namespace Script
         private readonly BasePlayerAttack _playerAttack;
         private readonly BasePlayerMove _playerMove;
         private readonly PlayerFlip _playerFlip;
-        public MoveAndAttackState(BasePlayerAttack playerAttack,BasePlayerMove move,IStateSwitcher stateSwitcher) : base(stateSwitcher)
+        public MoveAndAttackState(BasePlayerAttack playerAttack,BasePlayerMove move,IStateSwitcher stateSwitch) : base(stateSwitch)
         {
             _playerAttack = playerAttack;
             _playerMove = move;
@@ -27,7 +27,7 @@ namespace Script
             _playerMove.Update();
             if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
             {
-                StateSwitcher.SwitchState<IdleState>();
+                StateSwitch.SwitchState<IdleState>();
             }
         }
     }
