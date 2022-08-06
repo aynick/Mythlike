@@ -21,7 +21,6 @@ namespace Script
 
         public void Update()
         {
-            Debug.LogError(_nextAttack);
             _nextAttack -= Time.deltaTime;
             IsAttacked = false;
             if (_nextAttack < 0)

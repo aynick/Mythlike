@@ -30,7 +30,7 @@ namespace Script
             {
                 StateSwitch.SwitchState<EnemyChaseState>();   
             }
-            else if (_rigidbody2D.velocity == Vector2.zero)
+            else if (_rigidbody2D.velocity.normalized == Vector2.zero)
             {
                 _animator.SetTrigger("Idle");
             }
