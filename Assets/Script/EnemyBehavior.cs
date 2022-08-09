@@ -2,13 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Serialization;
 using Script;
 using UnityEngine;
+using Object = UnityEngine.Object;
+
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 public class EnemyBehavior : MonoBehaviour,IStateSwitcher
 {
     private EnemyChase _enemyChase;
+    public EnemyApplyDamage EnemyApplyDamage;
     private EnemyPatrol _enemyPatrol;
     private EnemyAttack _enemyAttack;
     private BaseState _currentState;
@@ -33,6 +37,7 @@ public class EnemyBehavior : MonoBehaviour,IStateSwitcher
     private void InitTools()
     {
         var rigidbody2D = GetComponent<Rigidbody2D>();
+        EnemyApplyDamage = new EnemyApplyDamage(_enemy,gameObject,FindObjectOfType<PlayerEventHandler>());
         _enemyChase = new EnemyChase(transform,_enemy,rigidbody2D);
         _enemyPatrol = new EnemyPatrol(rigidbody2D,_enemy);
         _enemyAttack = new EnemyAttack(_enemy,transform);

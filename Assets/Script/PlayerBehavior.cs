@@ -17,6 +17,7 @@ namespace Script
         private List<BaseState> _allStates;
         public PlayerApplyDamage PlayerApplyDamage;
         [SerializeField] private PlayerType _playerType;
+        [SerializeField] private Joystick _joystick;
 
         private void Awake()
         {
@@ -28,8 +29,8 @@ namespace Script
         {
             _allStates = new List<BaseState>()
             {
-                new MoveAndAttackState(_playerAttack,_playerMove,this),
-                new IdleState(this,_playerAttack)
+                new MoveAndAttackState(_playerAttack,_playerMove,this,_joystick),
+                new IdleState(this,_playerAttack,_joystick)
             };
             _currentState = _allStates[0];
         }
@@ -55,7 +56,7 @@ namespace Script
         {
             PlayerApplyDamage = new PlayerApplyDamage(_player);
             _playerAttack = new BasePlayerAttack(transform,_player,_playerFlip);
-            _playerMove = new BasePlayerMove(GetComponent<Rigidbody2D>(),_player.speed);
+            _playerMove = new BasePlayerMove(GetComponent<Rigidbody2D>(),_player.speed,_joystick);
         }
 
         private void Update()

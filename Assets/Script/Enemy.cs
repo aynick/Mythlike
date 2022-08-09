@@ -2,7 +2,7 @@
 {
     public abstract class Enemy
     {
-        private int _healthPoint;
+        public int _healthPoint;
         public float AttackRange;
         public int Damage;
         public float AttackRate;

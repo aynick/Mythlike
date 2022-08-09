@@ -8,10 +8,12 @@ namespace Script
         private readonly BasePlayerAttack _playerAttack;
         private readonly BasePlayerMove _playerMove;
         private readonly PlayerFlip _playerFlip;
-        public MoveAndAttackState(BasePlayerAttack playerAttack,BasePlayerMove move,IStateSwitcher stateSwitch) : base(stateSwitch)
+        private Joystick _joystick;
+        public MoveAndAttackState(BasePlayerAttack playerAttack,BasePlayerMove move,IStateSwitcher stateSwitch,Joystick joystick) : base(stateSwitch)
         {
             _playerAttack = playerAttack;
             _playerMove = move;
+            _joystick = joystick;
         }
         public override void Enter()
         {
@@ -25,7 +27,7 @@ namespace Script
         {
             _playerAttack.Update();
             _playerMove.Update();
-            if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
+            if (_joystick.Direction == Vector2.zero)
             {
                 StateSwitch.SwitchState<IdleState>();
             }

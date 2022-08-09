@@ -107,10 +107,10 @@ TextureImporter:
       name: DecorTileSet_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 152
-        width: 22
-        height: 25
+        x: 15
+        y: 135
+        width: 18
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,8 +149,8 @@ TextureImporter:
       name: DecorTileSet_2
       rect:
         serializedVersion: 2
-        x: 65
-        y: 152
+        x: 49
+        y: 120
         width: 15
         height: 16
       alignment: 0
@@ -196,7 +196,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -204,6 +204,111 @@ TextureImporter:
       bones: []
       spriteID: 6d9798f5b537b6e4db0a1f05affae423
       internalID: -552601546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DecorTileSet_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 120
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f676a54ec8ecbe643ab3061c67897525
+      internalID: 1182442678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DecorTileSet_6
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 120
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ebbe7766cd748047ae822d59189694b
+      internalID: 644203003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DecorTileSet_7
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 88
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d99479a46b5a634cbdf5942d53a5aee
+      internalID: -741438933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DecorTileSet_8
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 88
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6584e18c23dad3040a0f63a6861bd4b6
+      internalID: 2065920324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DecorTileSet_9
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 55
+        width: 45
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c8d1a31f915c9f4e95ba2286b1ae1a7
+      internalID: -1295618933
       vertices: []
       indices: 
       edges: []
@@ -219,10 +324,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      DecorTileSet_6: 644203003
+      DecorTileSet_5: 1182442678
+      DecorTileSet_9: -1295618933
       DecorTileSet_1: -886579349
       DecorTileSet_0: -68321130
+      DecorTileSet_7: -741438933
       DecorTileSet_2: -1933563138
       DecorTileSet_3: -1682650811
+      DecorTileSet_8: 2065920324
       DecorTileSet_4: -552601546
   spritePackingTag: 
   pSDRemoveMatte: 0

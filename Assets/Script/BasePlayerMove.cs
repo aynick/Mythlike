@@ -6,12 +6,14 @@ namespace Script
     {
         private float _speed;
         private Rigidbody2D rigidbody2D;
+        private Joystick _joystick;
     
-        public BasePlayerMove(Rigidbody2D rigidbody2D, float speed)
+        public BasePlayerMove(Rigidbody2D rigidbody2D, float speed,Joystick joystick)
         {
             this.rigidbody2D = rigidbody2D;
             _speed = speed;
-            rigidbody2D.isKinematic = true;
+            _joystick = joystick;
+            this.rigidbody2D.isKinematic = true;
         }
 
         public void Update()
@@ -21,7 +23,8 @@ namespace Script
 
         private void Move()
         {
-            var dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            Debug.Log(_joystick.Direction);
+            var dir = _joystick.Direction;
             rigidbody2D.velocity = dir * _speed;
         }
     }
