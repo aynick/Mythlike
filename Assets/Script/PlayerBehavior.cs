@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Script
 {
@@ -18,6 +19,8 @@ namespace Script
         public PlayerApplyDamage PlayerApplyDamage;
         [SerializeField] private PlayerType _playerType;
         [SerializeField] private Joystick _joystick;
+        [SerializeField] private Button attackButton;
+        [SerializeField] private float range;
 
         private void Awake()
         {
@@ -55,7 +58,7 @@ namespace Script
         void InitPlayerTools()
         {
             PlayerApplyDamage = new PlayerApplyDamage(_player);
-            _playerAttack = new BasePlayerAttack(transform,_player,_playerFlip);
+            _playerAttack = new BasePlayerAttack(transform,_player,_playerFlip,GetComponent<Rigidbody2D>(),attackButton,range);
             _playerMove = new BasePlayerMove(GetComponent<Rigidbody2D>(),_player.speed,_joystick);
         }
 

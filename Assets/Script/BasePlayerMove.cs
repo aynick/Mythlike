@@ -13,7 +13,6 @@ namespace Script
             this.rigidbody2D = rigidbody2D;
             _speed = speed;
             _joystick = joystick;
-            this.rigidbody2D.isKinematic = true;
         }
 
         public void Update()
@@ -24,7 +23,7 @@ namespace Script
         private void Move()
         {
             Debug.Log(_joystick.Direction);
-            var dir = _joystick.Direction;
+            var dir = _joystick.Direction*2;
             rigidbody2D.velocity = dir * _speed;
         }
     }

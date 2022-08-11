@@ -11,6 +11,7 @@ using Object = UnityEngine.Object;
 [RequireComponent(typeof(Animator))]
 public class EnemyBehavior : MonoBehaviour,IStateSwitcher
 {
+    private RoomEventHandler _roomEventHandler;
     private EnemyChase _enemyChase;
     public EnemyApplyDamage EnemyApplyDamage;
     private EnemyPatrol _enemyPatrol;
@@ -18,10 +19,11 @@ public class EnemyBehavior : MonoBehaviour,IStateSwitcher
     private BaseState _currentState;
     private List<BaseState> _allStates;
     private Enemy _enemy;
+    public bool isActive;
 
     [SerializeField] private EnemyType enemyType;
 
-    private void Awake()
+    private void OnEnable()
     {
         Init();
     }
@@ -31,13 +33,13 @@ public class EnemyBehavior : MonoBehaviour,IStateSwitcher
         InitType();
         InitTools();
         InitStates();
-        GetComponent<Rigidbody2D>().isKinematic = true;
     }
 
     private void InitTools()
     {
         var rigidbody2D = GetComponent<Rigidbody2D>();
-        EnemyApplyDamage = new EnemyApplyDamage(_enemy,gameObject,FindObjectOfType<PlayerEventHandler>());
+        _roomEventHandler = transform.parent?.GetComponent<RoomEventHandler>();
+        EnemyApplyDamage = new EnemyApplyDamage(_enemy,gameObject,_roomEventHandler);
         _enemyChase = new EnemyChase(transform,_enemy,rigidbody2D);
         _enemyPatrol = new EnemyPatrol(rigidbody2D,_enemy);
         _enemyAttack = new EnemyAttack(_enemy,transform);
@@ -60,13 +62,13 @@ public class EnemyBehavior : MonoBehaviour,IStateSwitcher
     {
         switch (enemyType)
         {
-            case EnemyType.Mimik : _enemy = new MimikEnemy(3,2,1,2,3,8);
+            case EnemyType.Mimik : _enemy = new MimikEnemy(3,2,1,2,10,8);
                 break;
-            case EnemyType.Troll : _enemy = new TrollEnemy(3,2,1,2,3,8);
+            case EnemyType.Troll : _enemy = new TrollEnemy(3,2,1,2,10,8);
                 break;
-            case EnemyType.Skeleton : _enemy = new SkeletonEnemy(3,2,1,2,3,8);
+            case EnemyType.Skeleton : _enemy = new SkeletonEnemy(3,2,1,2,10,8);
                 break;
-            case EnemyType.Slime : _enemy = new SlimeEnemy(3,2,1,2,3,8);
+            case EnemyType.Slime : _enemy = new SlimeEnemy(3,2,1,2,10,8);
                 break;
         }
     }
@@ -81,6 +83,9 @@ public class EnemyBehavior : MonoBehaviour,IStateSwitcher
 
     private void Update()
     {
-        _currentState.Action();
+        if (isActive)
+            _currentState.Action();
+        else
+            Destroy(gameObject);
     }
 }

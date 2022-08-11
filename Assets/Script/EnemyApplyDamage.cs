@@ -6,12 +6,13 @@ namespace Script
     {
         private int healthPoint;
         private GameObject _gameObject;
-        private PlayerEventHandler _playerEventHandler;
+        private RoomEventHandler _roomEventHandler;
 
-        public EnemyApplyDamage(Enemy enemy,GameObject gameObject,PlayerEventHandler playerEventHandler)
+        public EnemyApplyDamage(Enemy enemy,GameObject gameObject,RoomEventHandler roomEventHandler)
         {
             healthPoint = enemy._healthPoint;
             _gameObject = gameObject;
+            _roomEventHandler = roomEventHandler;
         }
         
         public void Apply(int damage)
@@ -19,6 +20,7 @@ namespace Script
             healthPoint -= damage;
             if (healthPoint <= 0)
             {
+                _roomEventHandler.OnEnemyDeath();
                 Object.Destroy(_gameObject);
             }
         }

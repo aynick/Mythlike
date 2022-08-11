@@ -9,7 +9,7 @@ namespace Script
             speed = 4;
             healthPoint = 2;
             protection = 0;
-            damage = 3;
+            damage = 15;
         }
     }
 }

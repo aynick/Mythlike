@@ -132,10 +132,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_Mass: 124124
+  m_LinearDrag: 124
+  m_AngularDrag: 125
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerType: 1
+  _joystick: {fileID: 0}
 --- !u!114 &5719864497672264107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,8 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 5719864497491580625}
-  leftPos: {fileID: 0}
-  rightPos: {fileID: 0}
 --- !u!1 &5719864498276538977
 GameObject:
   m_ObjectHideFlags: 0

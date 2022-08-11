@@ -185,28 +185,27 @@ namespace Script
                 {
                     if (mayDir[i] == Vector2Int.down)
                     {
-                        room.DoorD.SetActive(false);
-                        selectRoom.DoorU.SetActive(false);
+                        room.DoorD.Lock(false);
+                        selectRoom.DoorU.Lock(false);
                     }
                     
                     if (mayDir[i] == Vector2Int.left)
                     {
-                        
-                        room.DoorL.SetActive(false);
-                        selectRoom.DoorR.SetActive(false);
+                        room.DoorL.Lock(false);
+                        selectRoom.DoorR.Lock(false);
                     }
                     
                     if (mayDir[i] == Vector2Int.right)
                     {
                         
-                        room.DoorR.SetActive(false);
-                        selectRoom.DoorL.SetActive(false);
+                        room.DoorR.Lock(false);
+                        selectRoom.DoorL.Lock(false);
                     }
                     
                     if (mayDir[i] == Vector2Int.up)
                     {
-                        room.DoorU.SetActive(false);
-                        selectRoom.DoorD.SetActive(false);
+                        room.DoorU.Lock(false);
+                        selectRoom.DoorD.Lock(false);
                     }
                 }
             }

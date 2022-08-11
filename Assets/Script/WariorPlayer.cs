@@ -11,6 +11,6 @@ public class WarriorPlayer : Player
         healthPoint = 5;
         protection = 3;
         damage = 1;
-        speed = 4;
+        speed = 12;
     }
 }
